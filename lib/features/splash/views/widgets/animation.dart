@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DotsJumpAnimation extends StatefulWidget {
+  const DotsJumpAnimation({super.key});
+
   @override
   _DotsJumpAnimationState createState() => _DotsJumpAnimationState();
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:live_tracking_app/core/utils/styles.dart';
+import 'package:live_tracking/core/utils/styles.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({

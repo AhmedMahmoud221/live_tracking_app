@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_tracking_app/core/utils/app_router.dart';
-import 'package:live_tracking_app/core/utils/assets.dart';
-import 'package:live_tracking_app/features/splash/views/widgets/animation.dart';
+import 'package:live_tracking/core/utils/app_router.dart';
+import 'package:live_tracking/core/utils/assets.dart';
+import 'package:live_tracking/features/splash/views/widgets/animation.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});

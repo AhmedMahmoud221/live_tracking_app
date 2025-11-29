@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:live_tracking_app/features/auth/login/login_page_view.dart';
-import 'package:live_tracking_app/features/auth/signup/signup_page_view.dart';
-import 'package:live_tracking_app/features/home/google_map_view.dart';
-import 'package:live_tracking_app/features/splash/views/splash_view.dart';
+import 'package:live_tracking/features/auth/login/login_page_view.dart';
+import 'package:live_tracking/features/auth/signup/signup_page_view.dart';
+import 'package:live_tracking/features/home/google_map_view.dart';
+import 'package:live_tracking/features/splash/views/splash_view.dart';
 
 abstract class AppRouter {
   static const kSplashView = '/';

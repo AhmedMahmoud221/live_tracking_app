@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_tracking_app/core/utils/app_router.dart';
-import 'package:live_tracking_app/core/utils/assets.dart';
-import 'package:live_tracking_app/core/utils/styles.dart';
-import 'package:live_tracking_app/features/auth/login/widgets/custom_account_option.dart';
-import 'package:live_tracking_app/features/auth/login/widgets/custom_button.dart';
-import 'package:live_tracking_app/features/auth/login/widgets/custom_text_field.dart';
-import 'package:live_tracking_app/features/auth/login/widgets/live_tracking_text.dart';
+import 'package:live_tracking/core/utils/app_router.dart';
+import 'package:live_tracking/core/utils/assets.dart';
+import 'package:live_tracking/core/utils/styles.dart';
+import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
+import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
+import 'package:live_tracking/features/auth/login/widgets/custom_text_field.dart';
+import 'package:live_tracking/features/auth/login/widgets/live_tracking_text.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginPageBody extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:live_tracking_app/core/utils/app_router.dart';
+import 'package:live_tracking/core/utils/app_router.dart';
 
 void main() {
   runApp(const LiveTrackingApp());

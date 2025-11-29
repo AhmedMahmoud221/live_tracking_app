@@ -12,9 +12,10 @@ class _DotsJumpAnimationState extends State<DotsJumpAnimation>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 600))
-          ..repeat();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    )..repeat();
   }
 
   @override
@@ -38,7 +39,7 @@ class _DotsJumpAnimationState extends State<DotsJumpAnimation>
                 offset: Offset(0, -10 * Curves.easeOut.transform(value)),
                 child: const CircleAvatar(
                   radius: 6,
-                  backgroundColor: Color(0xff60B0E3),
+                  backgroundColor: Color.fromARGB(255, 58, 58, 58),
                 ),
               );
             },

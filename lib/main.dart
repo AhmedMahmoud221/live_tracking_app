@@ -13,9 +13,7 @@ class LiveTrackingApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-          textTheme:ThemeData.dark().textTheme,
-        ),
-      );
+      theme: ThemeData.light().copyWith(textTheme: ThemeData.dark().textTheme),
+    );
   }
 }

@@ -3,8 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:live_tracking_app/core/utils/app_router.dart';
 import 'package:live_tracking_app/core/utils/assets.dart';
 import 'package:live_tracking_app/core/utils/styles.dart';
+import 'package:live_tracking_app/features/auth/login/widgets/custom_account_option.dart';
 import 'package:live_tracking_app/features/auth/login/widgets/custom_button.dart';
 import 'package:live_tracking_app/features/auth/login/widgets/custom_text_field.dart';
+import 'package:live_tracking_app/features/auth/login/widgets/live_tracking_text.dart';
 import 'package:live_tracking_app/features/auth/login/widgets/login_page_body.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -35,46 +37,28 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Live',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Tracking',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
+
+                      // live tracking text
+                      LiveTrackingText(),
 
                       const SizedBox(height: 20),
 
-                      // الصورة
+                      // image
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: Image.asset(
-                          AssetsData.login,
-                          height: 250,
-                          width: 300, // نفس العرض لكل العناصر
+                          AssetsData.signup,
+                          height: 200,
+                          width: 300,
                           fit: BoxFit.cover,
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
 
+                      // sign up text
                       Padding(
-                        padding: const EdgeInsets.only(left: 24, top: 10),
+                        padding: const EdgeInsets.only(left: 24),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -88,7 +72,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
 
                       const SizedBox(height: 6),
 
-                      // TextFormFields
+                      // custrom text fields
                       SizedBox(
                         width: 350,
                         child: CustomTextField(
@@ -101,6 +85,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
 
                       const SizedBox(height: 10),
 
+                      // custrom text fields
                       SizedBox(
                         width: 350,
                         child: CustomTextField(
@@ -112,6 +97,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
 
                       const SizedBox(height: 10),
 
+                      // custrom text fields
                       SizedBox(
                         width: 350,
                         child: CustomTextField(
@@ -121,33 +107,15 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                         ),
                       ),
 
+                      // account option
                       Padding(
                         padding: const EdgeInsets.only(left: 24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Already have an account?',
-                              style: Styles.textStyle16.copyWith(
-                                color: Colors.black54.withOpacity(0.3),
-                              ),
-                            ),
-                            SizedBox(width: 2),
-                            TextButton(
-                              onPressed: () {
-                                GoRouter.of(
-                                  context,
-                                ).go(AppRouter.kLoginPageView);
-                              },
-                              child: Text(
-                                'Sign In',
-                                style: Styles.textStyle16.copyWith(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: CustomAccountOption(
+                          onPressed: () {
+                            GoRouter.of(context).go(AppRouter.kLoginPageView);
+                          },
+                          text1: 'Already have an account?',
+                          text2: 'Sign In',
                         ),
                       ),
                     ],
@@ -157,6 +125,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
 
               const SizedBox(height: 20),
 
+              // custom button
               SizedBox(
                 width: 350,
                 child: CustomButton(
@@ -181,7 +150,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         isLoading = true;
       });
 
-      // login وهمي بدون Firebase
+      // login Fake Firebase
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           isLoading = false;

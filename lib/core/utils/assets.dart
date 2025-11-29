@@ -1,6 +1,7 @@
 class AssetsData {
-  static const login = 'assets/images/LogIn.png';
-  static const splash = 'assets/images/splash.png';
-  static const test1 = 'assets/images/1.jpg';
-  static const test2 = 'assets/images/2.jpg';
+  static const login = 'assets/images/LogIn.jpg';
+  static const signup = 'assets/images/Signup.jpg';
+  static const splash = 'assets/images/splash1.png';
+  static const splash2 = 'assets/images/splash2.png';
+  static const splash3 = 'assets/images/splash3.png';
 }

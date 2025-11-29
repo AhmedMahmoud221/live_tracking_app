@@ -42,7 +42,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
         SizedBox(
           width: 200,
           height: 200,
-          child: Image.asset(AssetsData.splash)),
+          child: Image.asset(AssetsData.splash),
+        ),
         DotsJumpAnimation(),
       ],
     );
@@ -61,8 +62,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     animationController.forward();
   }
-
-  
 
   void navigateToHome() {
     Future.delayed(const Duration(seconds: 5), () {

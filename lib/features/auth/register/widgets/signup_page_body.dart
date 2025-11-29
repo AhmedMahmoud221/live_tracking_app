@@ -5,22 +5,19 @@ import 'package:live_tracking_app/core/utils/assets.dart';
 import 'package:live_tracking_app/core/utils/styles.dart';
 import 'package:live_tracking_app/features/auth/login/widgets/custom_button.dart';
 import 'package:live_tracking_app/features/auth/login/widgets/custom_text_field.dart';
+import 'package:live_tracking_app/features/auth/login/widgets/login_page_body.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LoginPageBody extends StatefulWidget {
-  static const id = '/login';
-  const LoginPageBody({super.key});
+class SignupPageBody extends StatefulWidget {
+  const SignupPageBody({super.key});
 
   @override
-  State<LoginPageBody> createState() => _LoginPageBodyState();
+  State<SignupPageBody> createState() => _SignupPageBodyState();
 }
 
-String? email, password;
-
-class _LoginPageBodyState extends State<LoginPageBody> {
-  final GlobalKey<FormState> formKey = GlobalKey();
+class _SignupPageBodyState extends State<SignupPageBody> {
   bool isLoading = false;
-
+  final GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +78,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Sign In',
+                            'Sign Up',
                             style: Styles.textStyle18.copyWith(
                               color: Colors.black,
                             ),
@@ -95,7 +92,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       SizedBox(
                         width: 350,
                         child: CustomTextField(
-                          hint: 'Email',
+                          hint: 'Enter your email',
                           controller: TextEditingController(),
                           keyboardType: TextInputType.emailAddress,
                           isPassword: false,
@@ -107,7 +104,18 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       SizedBox(
                         width: 350,
                         child: CustomTextField(
-                          hint: 'Password',
+                          hint: 'Enter your password',
+                          controller: TextEditingController(),
+                          isPassword: true,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      SizedBox(
+                        width: 350,
+                        child: CustomTextField(
+                          hint: 'Confirm Password',
                           controller: TextEditingController(),
                           isPassword: true,
                         ),
@@ -119,7 +127,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'You not have an account?',
+                              'Already have an account?',
                               style: Styles.textStyle16.copyWith(
                                 color: Colors.black54.withOpacity(0.3),
                               ),
@@ -129,10 +137,10 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                               onPressed: () {
                                 GoRouter.of(
                                   context,
-                                ).go(AppRouter.kSignupPageView);
+                                ).go(AppRouter.kLoginPageView);
                               },
                               child: Text(
-                                'Sign Up',
+                                'Sign In',
                                 style: Styles.textStyle16.copyWith(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500,
@@ -152,9 +160,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
               SizedBox(
                 width: 350,
                 child: CustomButton(
-                  buttonText: 'Log In',
+                  buttonText: 'Register',
                   onTap: () {
-                    GoRouter.of(context).go(AppRouter.kGoogleMapView);
+                    GoRouter.of(context).go(AppRouter.kLoginPageView);
                   },
                 ),
               ),

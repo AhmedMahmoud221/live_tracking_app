@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:live_tracking_app/core/utils/app_router.dart';
 import 'package:live_tracking_app/core/utils/styles.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({super.key});
+  const CustomButton({
+    super.key,
+    required this.buttonText,
+    required this.onTap,
+  });
 
+  final String buttonText;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).go(AppRouter.kGoogleMapView);
+        onTap();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -21,12 +25,13 @@ class CustomButton extends StatelessWidget {
         height: 60,
         child: Center(
           child: Text(
-            'Log In',
-            style:Styles.textStyle20.copyWith(
+            buttonText,
+            style: Styles.textStyle20.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w800,
-            )
-            ),),
+            ),
+          ),
+        ),
       ),
     );
   }

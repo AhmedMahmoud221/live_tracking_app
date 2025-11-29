@@ -1,43 +1,41 @@
 import 'package:flutter/material.dart';
 
-class CustomFormTextField extends StatelessWidget {
-  const CustomFormTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
-    this.onChanged,
-    this.hintText,
-    this.obscureText = false,
+    required this.hint,
+    required this.controller,
+    this.isPassword = false,
+    this.keyboardType = TextInputType.text,
   });
 
-  final Function(String)? onChanged;
-  final String? hintText;
-  final bool obscureText;
+  final String hint;
+  final TextEditingController controller;
+  final bool isPassword;
+  final TextInputType keyboardType;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: const TextStyle(color: Colors.white), // 👈 هنا يخلي النص الأبيض
-
-      obscureText: obscureText,
-      validator: (data){
-        if(data == null || data.isEmpty){
-          return 'field is required';
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.blue),
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        hintText: hint,
+        hintStyle: TextStyle(color: Colors.grey),
+      ),
+      style: TextStyle(color: Colors.black),
+      controller: controller,
+      obscureText: isPassword,
+      keyboardType: keyboardType,
+      validator: (v) {
+        if (v == null || v.isEmpty) {
+          return 'Please enter $hint';
         }
         return null;
       },
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Colors.white70, // 👈 لون فاتح وواضح على الخلفية الغامقة
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white
-            ),
-            ),
-      ),
     );
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/features/auth/models/drawer_item_model.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_divider.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_drawer_items_list.dart';
+import 'package:live_tracking/features/home/drawer/widgets/custom_logout_button.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_toggle.dart';
 import 'package:live_tracking/features/home/drawer/widgets/drawer_header.dart';
 
@@ -43,31 +46,11 @@ class CustomDrawer extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-
+              GoRouter.of(context).go(AppRouter.kLoginPageView);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 28),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.logout,
-                    color: Colors.red,
-                    size: 36,
-                  ),
-                  SizedBox(width: 14),
-                  Text(
-                    'Logout',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white     // dark mode ( white color )
-                      : const Color(0xFF7B7B7B), // light mode ( dark grey color ),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
+              child: CustomLogoutButton(theme: theme),
             ),
           ),
 
@@ -77,6 +60,8 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 }
+
+
 
 
 

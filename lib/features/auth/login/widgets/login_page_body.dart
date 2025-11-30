@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/core/utils/assets.dart';
-import 'package:live_tracking/core/utils/styles.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
+import 'package:live_tracking/features/auth/login/widgets/custom_text_feild_head.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_field.dart';
 import 'package:live_tracking/features/auth/login/widgets/live_tracking_text.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -30,102 +30,106 @@ class _LoginPageBodyState extends State<LoginPageBody> {
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 20),
-                      // live tracking text
-                      SizedBox(child: LiveTrackingText()),
-
-                      // image
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.asset(
-                          AssetsData.login,
-                          height: 250,
-                          width: 350,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      // sign in text
-                      Padding(
-                        padding: const EdgeInsets.only(left: 24),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Sign In',
-                            style: Styles.textStyle18.copyWith(
-                              color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 20),
+                          // live tracking text
+                          SizedBox(child: LiveTrackingText()),
+                                  
+                          // image
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              AssetsData.login,
+                              height: 250,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
+                                  
+                          const SizedBox(height: 10),
+                                  
+                          // sign in text
+                          // Align(
+                          //   alignment: Alignment.centerLeft,
+                          //   child: Text(
+                          //     'Sign In',
+                          //     style: Styles.textStyle18.copyWith(
+                          //       color: Colors.black,
+                          //     ),
+                          //   ),
+                          // ),
+
+                          CustomTextFeildHead(title: 
+                            'Email',
+                          ),
+                                  
+                          const SizedBox(height: 6),
+                                  
+                          // custom text fields
+                          SizedBox(
+                            child: CustomTextField(
+                              hint: 'Enter your email',
+                              controller: TextEditingController(),
+                              keyboardType: TextInputType.emailAddress,
+                              isPassword: false,
+                            ),
+                          ),
+
+                          const SizedBox(height: 6),
+                                  
+                          CustomTextFeildHead(title: 
+                            'Password',
+                          ),
+                                  
+                          // custom text fields
+                          SizedBox(
+                            child: CustomTextField(
+                              hint: 'Enter your password',
+                              controller: TextEditingController(),
+                              isPassword: true,
+                            ),
+                          ),
+                                  
+                          // account option
+                          CustomAccountOption(
+                            onPressed: () {
+                              GoRouter.of(context).go(AppRouter.kSignupPageView);
+                            },
+                            text1: 'You don\'t have an account ?',
+                            text2: 'Sign Up',
+                          ),
+                        ],
                       ),
-
-                      const SizedBox(height: 6),
-
-                      // custom text fields
-                      SizedBox(
-                        width: 350,
-                        child: CustomTextField(
-                          hint: 'Email',
-                          controller: TextEditingController(),
-                          keyboardType: TextInputType.emailAddress,
-                          isPassword: false,
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      // custom text fields
-                      SizedBox(
-                        width: 350,
-                        child: CustomTextField(
-                          hint: 'Password',
-                          controller: TextEditingController(),
-                          isPassword: true,
-                        ),
-                      ),
-
-                      // account option
-                      Padding(
-                        padding: const EdgeInsets.only(left: 24),
-                        child: CustomAccountOption(
-                          onPressed: () {
-                            GoRouter.of(context).go(AppRouter.kSignupPageView);
-                          },
-                          text1: 'You don\'t have an account?',
-                          text2: 'Sign Up',
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // custom button
-              SizedBox(
-                width: 350,
-                child: CustomButton(
-                  buttonText: 'Log In',
-                  onTap: () {
-                    GoRouter.of(context).go(AppRouter.kGoogleMapView);
-                  },
+            
+                const SizedBox(height: 20),
+            
+                // custom button
+                SizedBox(
+                  child: CustomButton(
+                    buttonText: 'Sign In',
+                    onTap: () {
+                      GoRouter.of(context).go(AppRouter.kGoogleMapView);
+                    },
+                  ),
                 ),
-              ),
-
-              const SizedBox(height: 20),
-            ],
+            
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

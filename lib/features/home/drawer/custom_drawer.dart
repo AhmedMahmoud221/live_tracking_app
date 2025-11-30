@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:live_tracking/features/auth/models/drawer_item_model.dart';
+import 'package:live_tracking/features/home/drawer/widgets/custom_divider.dart';
+import 'package:live_tracking/features/home/drawer/widgets/custom_drawer_items_list.dart';
+import 'package:live_tracking/features/home/drawer/widgets/custom_toggle.dart';
+import 'package:live_tracking/features/home/drawer/widgets/drawer_header.dart';
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
+  static const List<DrawerItemModel> items = [
+    DrawerItemModel(title: 'Profile', icon: Icons.account_circle,),
+    DrawerItemModel(title: 'Notification', icon: Icons.notifications),
+    DrawerItemModel(title: 'Setting', icon: Icons.settings),
+    DrawerItemModel(title: 'About', icon: Icons.info),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context); 
+
+    return Drawer(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      child: Column(
+        children: [
+          DrawerHeaderInfo(),
+
+          SizedBox(height: 14),
+
+          // Toggle the theme mode
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: CustomToggle(theme: theme),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: CustomDivider(theme: theme),
+          ),
+
+          SizedBox(height: 10),
+
+          Expanded(child: CustomDrawerItemsListView(items: items)),
+
+          GestureDetector(
+            onTap: () {
+
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 28),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.red,
+                    size: 36,
+                  ),
+                  SizedBox(width: 14),
+                  Text(
+                    'Logout',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white     // dark mode ( white color )
+                      : const Color(0xFF7B7B7B), // light mode ( dark grey color ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(height: 30),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+// colore 0XFFE2F2FF  & Color(0XFF7B7B7B)
+
+// roboto & inter

@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/features/auth/login/login_page_view.dart';
-import 'package:live_tracking/features/auth/signup/signup_page_view.dart';
+import 'package:live_tracking/features/auth/login/signup/signup_page_view.dart';
 import 'package:live_tracking/features/home/google_map_view.dart';
 import 'package:live_tracking/features/splash/views/splash_view.dart';
 

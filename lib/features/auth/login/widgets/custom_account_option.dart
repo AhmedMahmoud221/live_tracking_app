@@ -23,7 +23,6 @@ class CustomAccountOption extends StatelessWidget {
             color: Colors.black54.withOpacity(0.3),
           ),
         ),
-        SizedBox(width: 2),
         TextButton(
           onPressed: onPressed,
           child: Text(

@@ -75,7 +75,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget{
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: CircleAvatar(
-            radius: 20,
+            radius: 18,
             backgroundImage: AssetImage("assets/images/splash1.png"),
             backgroundColor: Colors.white,
           ),

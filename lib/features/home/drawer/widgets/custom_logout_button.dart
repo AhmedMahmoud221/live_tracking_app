@@ -5,9 +5,7 @@ class CustomLogoutButton extends StatelessWidget {
     super.key,
     required this.theme,
   });
-
   final ThemeData theme;
-
   @override
   Widget build(BuildContext context) {
     return Row(

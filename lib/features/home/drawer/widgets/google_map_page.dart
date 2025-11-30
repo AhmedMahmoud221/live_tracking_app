@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:live_tracking/features/home/drawer/custom_drawer.dart';
 import 'package:live_tracking/features/home/widgets/google_map_body.dart';
 
-class GoogleMapView extends StatefulWidget {
-  const GoogleMapView({super.key});
+class GoogleMapAppbar extends StatefulWidget {
+  const GoogleMapAppbar({super.key});
 
   @override
-  State<GoogleMapView> createState() => _GoogleMapViewState();
+  State<GoogleMapAppbar> createState() => _GoogleMapAppbarState();
 }
 
-class _GoogleMapViewState extends State<GoogleMapView> {
+class _GoogleMapAppbarState extends State<GoogleMapAppbar> {
   GlobalKey<ScaffoldState> ScaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget{
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: CircleAvatar(
-            radius: 18,
-            backgroundImage: AssetImage("assets/images/splash1.png"),
+            radius: 22,
+            backgroundImage: AssetImage("assets/images/profilePhoto.jpg"),
             backgroundColor: Colors.white,
           ),
         ),

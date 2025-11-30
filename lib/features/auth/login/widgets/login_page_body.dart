@@ -122,7 +122,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                   child: CustomButton(
                     buttonText: 'Sign In',
                     onTap: () {
-                      GoRouter.of(context).go(AppRouter.kGoogleMapView);
+                      GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
                     },
                   ),
                 ),
@@ -149,7 +149,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
         });
 
         if (email == "test@test.com" && password == "123456") {
-          GoRouter.of(context).go(AppRouter.kGoogleMapView);
+          GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Invalid email or password')),

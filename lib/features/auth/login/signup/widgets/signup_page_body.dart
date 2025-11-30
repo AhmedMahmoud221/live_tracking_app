@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/core/utils/assets.dart';
-import 'package:live_tracking/core/utils/styles.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_feild_head.dart';
@@ -157,7 +156,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         });
 
         if (email == "test@test.com" && password == "123456") {
-          GoRouter.of(context).go(AppRouter.kGoogleMapView);
+          GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Invalid email or password')),

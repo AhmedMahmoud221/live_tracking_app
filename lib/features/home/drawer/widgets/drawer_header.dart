@@ -36,14 +36,14 @@ class DrawerHeaderInfo extends StatelessWidget {
               ),
             ),
             child: Container(
-              width: 120,   // ضعف الـ radius
+              width: 120,  
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.black.withOpacity(0.2), width: 1),
                 image: DecorationImage(
-                  image: AssetImage(AssetsData.profile),
-                  fit: BoxFit.fill, // يحافظ على نسب الصورة ويملأ الدائرة
+                  image: AssetImage(AssetsData.profilephoto),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

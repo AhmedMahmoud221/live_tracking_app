@@ -32,24 +32,28 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
           googleMapController = controller;
           },
         ),
-        Positioned(
-          bottom: 16,
-          left: 40,
-          right: 80,
-          child: ElevatedButton(
-            onPressed: () 
-            {
-              // create new location for used this location by onPressed
-              CameraPosition newLocation = const CameraPosition(
-                target: LatLng(30.039908977332246, 31.217966571099677),
-                zoom: 16,);
-              // moved dynamic to new location from (animatedCamera)
-              googleMapController.animateCamera(CameraUpdate.newCameraPosition(newLocation));
-            }, 
-            child: Text('Change Location'),
-          ),
-        ),
       ]
     );
   }
 }
+
+
+
+
+// Positioned(
+        //   bottom: 16,
+        //   left: 40,
+        //   right: 80,
+        //   child: ElevatedButton(
+        //     onPressed: () 
+        //     {
+        //       // create new location for used this location by onPressed
+        //       CameraPosition newLocation = const CameraPosition(
+        //         target: LatLng(30.039908977332246, 31.217966571099677),
+        //         zoom: 16,);
+        //       // moved dynamic to new location from (animatedCamera)
+        //       googleMapController.animateCamera(CameraUpdate.newCameraPosition(newLocation));
+        //     }, 
+        //     child: Text('Change Location'),
+        //   ),
+        // ),

@@ -61,21 +61,21 @@ class AuthService {
     }
   }
 
-
   // Existing login & signup methods ...
-  Future<void> logout(String token) async {
-    final url = Uri.parse('${ApiConstants.baseUrl}api/user/logout');
+  Future<void> logoutbutton(String token) async {
+  final url = Uri.parse('${ApiConstants.baseUrl}api/user/logout');
 
-    final response = await client.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // لو API محتاج توكين
-      },
-    );
+  final response = await client.get(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+  );
 
-    if (response.statusCode != 200) {
-      throw Exception('Logout failed: ${response.body}');
-    }
+  if (response.statusCode != 200) {
+    throw Exception('Logout failed: ${response.body}');
   }
+}
+
 }

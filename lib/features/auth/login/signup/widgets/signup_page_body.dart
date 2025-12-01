@@ -164,8 +164,8 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         isLoading = false;
       });
 
-      // بعد نجاح التسجيل، اطبع التوكن أو خزنه
-      // print('Token: ${result.token}');
+       // after success login print token or saved
+      print('Token: ${result.token}');
 
       // Navigate to home page
       GoRouter.of(context).go(AppRouter.kLoginPageView);

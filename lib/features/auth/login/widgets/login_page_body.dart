@@ -127,6 +127,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
     );
   }
 
+  // login mithod 
   void _onLoginPressed() async {
   if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -143,7 +144,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
       password: _passwordCtrl.text.trim(),
     );
 
-    // حفظ التوكين
+     // save token
     await SecureStorage.saveToken(result.token);
 
       GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);

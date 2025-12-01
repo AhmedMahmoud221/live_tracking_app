@@ -28,28 +28,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
   bool isLoading = false;
 
   Future<void> _onLogoutPressed(BuildContext context) async {
-    setState(() => isLoading = true);
+  setState(() => isLoading = true);
 
-    try {
-      final token = await SecureStorage.readToken();
+  try {
+    final token = await SecureStorage.readToken();
 
-      if (token != null) {
-        await AuthService().logout(token); // API logout
-      }
-
-      await SecureStorage.deleteToken(); // remove the token
-
-      GoRouter.of(context).go(AppRouter.kLoginPageView);
-
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Logout failed: $e')),
-      );
-    } finally {
-      setState(() => isLoading = false);
+    if (token != null) {
+      await AuthService().logoutbutton(token);
     }
-  }
 
+    await SecureStorage.deleteToken();
+
+    if (!mounted) return;
+    GoRouter.of(context).go(AppRouter.kLoginPageView);
+
+  } catch (e) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Logout failed: $e')),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); 

@@ -7,7 +7,7 @@ import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_feild_head.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_field.dart';
 import 'package:live_tracking/features/auth/login/widgets/live_tracking_text.dart';
-import 'package:live_tracking/features/auth/login/widgets/login_page_body.dart';
+import 'package:live_tracking/features/data/services/auth_service.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignupPageBody extends StatefulWidget {
@@ -19,7 +19,14 @@ class SignupPageBody extends StatefulWidget {
 
 class _SignupPageBodyState extends State<SignupPageBody> {
   bool isLoading = false;
+
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passwordCtrl = TextEditingController();
+  final TextEditingController _confirmCtrl = TextEditingController();
+
   final GlobalKey<FormState> formKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +45,11 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 20),
-            
+                        const SizedBox(height: 20),
+
                         // live tracking text
                         LiveTrackingText(),
-                        
+
                         // image
                         ClipRRect(
                           borderRadius: BorderRadius.circular(16),
@@ -53,63 +60,41 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                             fit: BoxFit.cover,
                           ),
                         ),
-            
-                        //sign up text
-                        CustomTextFeildHead(
-                          title: 'Username',
+
+                        // Username
+                        const CustomTextFeildHead(title: 'Username'),
+                        CustomTextField(
+                          hint: 'Enter your username',
+                          controller: _nameCtrl,
+                          isPassword: false,
                         ),
-                        
-                        // custrom text fields
-                        SizedBox(
-                          child: CustomTextField(
-                            hint: 'Enter your username',
-                            controller: TextEditingController(),
-                            keyboardType: TextInputType.emailAddress,
-                            isPassword: false,
-                          ),
+
+                        // Email
+                        const CustomTextFeildHead(title: 'Email'),
+                        CustomTextField(
+                          hint: 'Enter your email',
+                          controller: _emailCtrl,
+                          keyboardType: TextInputType.emailAddress,
+                          isPassword: false,
                         ),
-                        
-                        CustomTextFeildHead(
-                          title: 'Email',
+
+                        // Password
+                        const CustomTextFeildHead(title: 'Password'),
+                        CustomTextField(
+                          hint: 'Enter your password',
+                          controller: _passwordCtrl,
+                          isPassword: true,
                         ),
-            
-                        // custrom text fields
-                        SizedBox(
-                          child: CustomTextField(
-                            hint: 'Enter your email',
-                            controller: TextEditingController(),
-                            keyboardType: TextInputType.emailAddress,
-                            isPassword: false,
-                          ),
+
+                        // Confirm Password
+                        const CustomTextFeildHead(title: 'Confirm Password'),
+                        CustomTextField(
+                          hint: 'Confirm Password',
+                          controller: _confirmCtrl,
+                          isPassword: true,
                         ),
-            
-                        CustomTextFeildHead(
-                          title: 'Password',
-                        ),
-            
-                        // custrom text fields
-                        SizedBox(
-                          child: CustomTextField(
-                            hint: 'Enter your password',
-                            controller: TextEditingController(),
-                            isPassword: true,
-                          ),
-                        ),
-            
-                        CustomTextFeildHead(
-                          title: 'Confirm Password',
-                        ),
-            
-                        // custrom text fields
-                        SizedBox(
-                          child: CustomTextField(
-                            hint: 'Confirm Password',
-                            controller: TextEditingController(),
-                            isPassword: true,
-                          ),
-                        ),
-            
-                        // account option
+
+                        // Account option
                         CustomAccountOption(
                           onPressed: () {
                             GoRouter.of(context).go(AppRouter.kLoginPageView);
@@ -121,19 +106,15 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                     ),
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
-            
-                // custom button
-                SizedBox(
-                  child: CustomButton(
-                    buttonText: 'Sign Up',
-                    onTap: () {
-                      GoRouter.of(context).go(AppRouter.kLoginPageView);
-                    },
-                  ),
+
+                // Sign Up button
+                CustomButton(
+                  buttonText: 'Sign Up',
+                  onTap: _onSignupPressed,
                 ),
-            
+
                 const SizedBox(height: 20),
               ],
             ),
@@ -143,28 +124,58 @@ class _SignupPageBodyState extends State<SignupPageBody> {
     );
   }
 
-  void _login() {
-    if (formKey.currentState?.validate() ?? false) {
+  bool _validateForm() {
+    if (_nameCtrl.text.isEmpty ||
+        _emailCtrl.text.isEmpty ||
+        _passwordCtrl.text.isEmpty ||
+        _confirmCtrl.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill all fields')),
+      );
+      return false;
+    }
+
+    if (_passwordCtrl.text != _confirmCtrl.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  void _onSignupPressed() async {
+    if (!_validateForm()) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final result = await AuthService().signup(
+        name: _nameCtrl.text.trim(),
+        email: _emailCtrl.text.trim(),
+        password: _passwordCtrl.text.trim(),
+        passwordConfirm: _confirmCtrl.text.trim(),
+      );
+
       setState(() {
-        isLoading = true;
+        isLoading = false;
       });
 
-      // login Fake Firebase
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() {
-          isLoading = false;
-        });
+      // بعد نجاح التسجيل، اطبع التوكن أو خزنه
+      // print('Token: ${result.token}');
 
-        if (email == "test@test.com" && password == "123456") {
-          GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Invalid email or password')),
-          );
-        }
+      // Navigate to home page
+      GoRouter.of(context).go(AppRouter.kLoginPageView);
+    } catch (e) {
+      setState(() {
+        isLoading = false;
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${e.toString()}')),
+      );
     }
   }
 }
-
-

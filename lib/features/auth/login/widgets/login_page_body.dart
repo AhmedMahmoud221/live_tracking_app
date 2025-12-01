@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/core/utils/assets.dart';
+import 'package:live_tracking/core/utils/storage_helper.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_feild_head.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_text_field.dart';
 import 'package:live_tracking/features/auth/login/widgets/live_tracking_text.dart';
+import 'package:live_tracking/features/data/services/auth_service.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginPageBody extends StatefulWidget {
@@ -21,8 +23,11 @@ String? email, password;
 
 class _LoginPageBodyState extends State<LoginPageBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
+  
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passwordCtrl = TextEditingController();
   bool isLoading = false;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,17 +63,6 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           ),
                                   
                           const SizedBox(height: 10),
-                                  
-                          // sign in text
-                          // Align(
-                          //   alignment: Alignment.centerLeft,
-                          //   child: Text(
-                          //     'Sign In',
-                          //     style: Styles.textStyle18.copyWith(
-                          //       color: Colors.black,
-                          //     ),
-                          //   ),
-                          // ),
 
                           CustomTextFeildHead(title: 
                             'Email',
@@ -80,8 +74,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           SizedBox(
                             child: CustomTextField(
                               hint: 'Enter your email',
-                              controller: TextEditingController(),
-                              keyboardType: TextInputType.emailAddress,
+                              controller: _emailCtrl,
                               isPassword: false,
                             ),
                           ),
@@ -95,9 +88,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           // custom text fields
                           SizedBox(
                             child: CustomTextField(
-                              hint: 'Enter your password',
-                              controller: TextEditingController(),
-                              isPassword: true,
+                               hint: 'Enter your password',
+                                controller: _passwordCtrl,
+                                isPassword: true,
                             ),
                           ),
                                   
@@ -121,9 +114,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                 SizedBox(
                   child: CustomButton(
                     buttonText: 'Sign In',
-                    onTap: () {
-                      GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
-                    },
+                    onTap: _onLoginPressed,
                   ),
                 ),
             
@@ -136,26 +127,32 @@ class _LoginPageBodyState extends State<LoginPageBody> {
     );
   }
 
-  void _login() {
-    if (formKey.currentState?.validate() ?? false) {
-      setState(() {
-        isLoading = true;
-      });
+  void _onLoginPressed() async {
+  if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Please fill all fields')),
+    );
+    return;
+  }
 
-      // login Fake Firebase
-      Future.delayed(const Duration(seconds: 1), () {
-        setState(() {
-          isLoading = false;
-        });
+  setState(() => isLoading = true);
 
-        if (email == "test@test.com" && password == "123456") {
-          GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Invalid email or password')),
-          );
-        }
-      });
+  try {
+    final result = await AuthService().login(
+      email: _emailCtrl.text.trim(),
+      password: _passwordCtrl.text.trim(),
+    );
+
+    // حفظ التوكين
+    await SecureStorage.saveToken(result.token);
+
+      GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed: ${e.toString()}')),
+      );
+    } finally {
+      setState(() => isLoading = false);
     }
   }
 }

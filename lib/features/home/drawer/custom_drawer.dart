@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/core/utils/app_router.dart';
+import 'package:live_tracking/core/utils/storage_helper.dart';
 import 'package:live_tracking/features/auth/models/drawer_item_model.dart';
+import 'package:live_tracking/features/data/services/auth_service.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_divider.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_drawer_items_list.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_logout_button.dart';
 import 'package:live_tracking/features/home/drawer/widgets/custom_toggle.dart';
 import 'package:live_tracking/features/home/drawer/widgets/drawer_header.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
   static const List<DrawerItemModel> items = [
@@ -17,6 +19,37 @@ class CustomDrawer extends StatelessWidget {
     DrawerItemModel(title: 'Setting', icon: Icons.settings),
     DrawerItemModel(title: 'About', icon: Icons.info),
   ];
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  bool isLoading = false;
+
+  Future<void> _onLogoutPressed(BuildContext context) async {
+    setState(() => isLoading = true);
+
+    try {
+      final token = await SecureStorage.readToken();
+
+      if (token != null) {
+        await AuthService().logout(token); // API logout
+      }
+
+      await SecureStorage.deleteToken(); // remove the token
+
+      GoRouter.of(context).go(AppRouter.kLoginPageView);
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Logout failed: $e')),
+      );
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); 
@@ -42,15 +75,15 @@ class CustomDrawer extends StatelessWidget {
 
           SizedBox(height: 10),
 
-          Expanded(child: CustomDrawerItemsListView(items: items)),
+          Expanded(child: CustomDrawerItemsListView(items: CustomDrawer.items)),
 
           GestureDetector(
-            onTap: () {
-              GoRouter.of(context).go(AppRouter.kLoginPageView);
-            },
+            onTap: () => _onLogoutPressed(context),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 28),
-              child: CustomLogoutButton(theme: theme),
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : CustomLogoutButton(theme: theme),
             ),
           ),
 
@@ -62,9 +95,3 @@ class CustomDrawer extends StatelessWidget {
 }
 
 
-
-
-
-// colore 0XFFE2F2FF  & Color(0XFF7B7B7B)
-
-// roboto & inter

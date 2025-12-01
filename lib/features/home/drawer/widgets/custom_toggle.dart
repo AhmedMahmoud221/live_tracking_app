@@ -28,7 +28,7 @@ class CustomToggle extends StatelessWidget {
           value: theme.brightness == Brightness.dark,
           
           // theme colors
-          activeColor: Colors.lightBlueAccent,  //circle color when Dark Mode is on
+          activeThumbColor: Colors.lightBlueAccent,  //circle color when Dark Mode is on
           activeTrackColor: Colors.blueGrey,  // background color when Dark Mode is on
     
           inactiveThumbColor: Colors.grey[700],   // circle color in Light Mode

@@ -1,32 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:live_tracking/features/home/drawer/custom_drawer.dart';
-import 'package:live_tracking/features/home/widgets/google_map_body.dart';
-
-class GoogleMapAppbar extends StatefulWidget {
-  const GoogleMapAppbar({super.key});
-
-  @override
-  State<GoogleMapAppbar> createState() => _GoogleMapAppbarState();
-}
-
-class _GoogleMapAppbarState extends State<GoogleMapAppbar> {
-  GlobalKey<ScaffoldState> ScaffoldKey = GlobalKey();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: ScaffoldKey,
-      drawer: const CustomDrawer(),
-      appBar: buildAppBar(context),
-      body: const GoogleMapBody(),
-    );
-  }
-
-
-  PreferredSizeWidget buildAppBar(BuildContext context) {
-    return CustomAppbar(ScaffoldKey: ScaffoldKey);
-  }
-
-}
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget{
   const CustomAppbar({

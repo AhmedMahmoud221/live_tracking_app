@@ -1,3 +1,5 @@
+
+
 import 'package:go_router/go_router.dart';
 import 'package:live_tracking/features/auth/login/login_page_view.dart';
 import 'package:live_tracking/features/auth/login/signup/signup_page_view.dart';
@@ -25,7 +27,7 @@ abstract class AppRouter {
 
       GoRoute(
         path: kGoogleMapHomePage,
-        builder: (context, state) => const GoogleMapHomePage(),
+        builder: (context, state) =>  GoogleMapHomePage(),
       ),
 
       GoRoute(

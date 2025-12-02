@@ -48,7 +48,8 @@ class _DrawerHeaderInfoState extends State<DrawerHeaderInfo> {
             ? const Color(0XFF7B7B7B)
             : const Color(0XFFE2F2FF),
         borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(40),
+          bottomRight: Radius.circular(50),
+          bottomLeft: Radius.circular(50),
         ),
       ),
       child: Column(

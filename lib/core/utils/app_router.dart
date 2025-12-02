@@ -25,10 +25,10 @@ abstract class AppRouter {
         builder: (context, state) => const LoginPageView(),
       ),
 
-      GoRoute(
-        path: kGoogleMapHomePage,
-        builder: (context, state) =>  GoogleMapHomePage(),
-      ),
+      // GoRoute(
+      //   path: kGoogleMapHomePage,
+      //   builder: (context, state) =>  GoogleMapHomePage(),
+      // ),
 
       GoRoute(
         path: kSignupPageView,

@@ -174,7 +174,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${e.toString()}')),
+        SnackBar(content: Text(e.toString())),
       );
     }
   }

@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:live_tracking/custom_bottom_bar.dart';
+import 'google_map_home_page.dart';
+import 'devices_page.dart';
+import 'notification_page.dart';
+import 'profile_page.dart';
+
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int selectedIndex = 0;
+
+  final List<Widget> pages = const [
+    GoogleMapHomePage2(),
+    DevicesPage(),
+    NotificationPage(),
+    ProfilePage(),
+  ];
+
+  final List<String> titles = const [
+    "Live Tracking",
+    "Devices",
+    "Notifications",
+    "Profile",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade50,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              titles[selectedIndex],
+              style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 115,),
+            Icon(Icons.notification_add)
+          ],
+        ),
+        centerTitle: true,
+        elevation: 4,
+      ),
+      body: IndexedStack(
+        index: selectedIndex,
+        children: pages,
+      ),
+      bottomNavigationBar: CustomBottomBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+      ),
+    );
+  }
+}

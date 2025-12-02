@@ -34,16 +34,9 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade50,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              titles[selectedIndex],
-              style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(width: 115,),
-            Icon(Icons.notification_add)
-          ],
+        title: Text(
+          titles[selectedIndex],
+          style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 4,

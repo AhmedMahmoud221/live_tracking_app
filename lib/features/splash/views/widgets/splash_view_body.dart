@@ -12,7 +12,7 @@ class SplashViewBody extends StatefulWidget {
 }
 
 class _SplashViewBodyState extends State<SplashViewBody>
-  with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
 
@@ -27,10 +27,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   void dispose() {
-    animationController
-        .dispose();
-    
-    super.dispose(); //Unsubscribe from streams and close network connections to avoid memory leaks and ensure the application functions efficiently.
+    animationController.dispose();
+
+    super
+        .dispose(); //Unsubscribe from streams and close network connections to avoid memory leaks and ensure the application functions efficiently.
   }
 
   @override
@@ -65,8 +65,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHome() {
     Future.delayed(const Duration(seconds: 5), () {
-      if (!mounted) return; // Check if the widget is still mounted before navigating
-      GoRouter.of(context).push(AppRouter.kLoginPageView);
+      if (!mounted) {
+        return; // Check if the widget is still mounted before navigating
+      }
+      GoRouter.of(context).go(AppRouter.kMainPage);
     });
   }
 }

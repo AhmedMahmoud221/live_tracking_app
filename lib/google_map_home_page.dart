@@ -6,10 +6,7 @@ class GoogleMapHomePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text(
-        "Google Map Page",
-        style: TextStyle(fontSize: 26),
-      ),
+      child: Text("Google Map Page", style: TextStyle(fontSize: 26)),
     );
   }
 }

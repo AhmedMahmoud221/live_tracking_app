@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({super.key});
+class LiveTrackingPage extends StatelessWidget {
+  const LiveTrackingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Notifications Page", style: TextStyle(fontSize: 26)),
-    );
+    return Center(child: Text('Live Tracking'));
   }
 }

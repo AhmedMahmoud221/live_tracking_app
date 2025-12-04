@@ -14,33 +14,13 @@ class _GoogleMapWithSheetState extends State<GoogleMapBody> {
   GoogleMapController? mapController;
 
   final DraggableScrollableController sheetController =
-    DraggableScrollableController();
+      DraggableScrollableController();
 
   List<DeviceModel> devices = [
-    DeviceModel(
-      name: "Device 1",
-      status: "online",
-      lat: 30.0444,
-      lng: 31.2357,
-    ),
-    DeviceModel(
-      name: "Device 2",
-      status: "offline",
-      lat: 29.956,
-      lng: 30.912,
-    ),
-    DeviceModel(
-      name: "Device 3",
-      status: "offline",
-      lat: 29.956,
-      lng: 30.912,
-    ),
-    DeviceModel(
-      name: "Device 4",
-      status: "offline",
-      lat: 29.956,
-      lng: 30.912,
-    ),
+    DeviceModel(name: "Device 1", status: "online", lat: 30.0444, lng: 31.2357),
+    DeviceModel(name: "Device 2", status: "offline", lat: 29.956, lng: 30.912),
+    DeviceModel(name: "Device 3", status: "offline", lat: 29.956, lng: 30.912),
+    DeviceModel(name: "Device 4", status: "offline", lat: 29.956, lng: 30.912),
   ];
 
   Set<Marker> markers = {};
@@ -67,10 +47,7 @@ class _GoogleMapWithSheetState extends State<GoogleMapBody> {
 
   void zoomToDevice(DeviceModel device) {
     mapController?.animateCamera(
-      CameraUpdate.newLatLngZoom(
-        LatLng(device.lat, device.lng),
-        14,
-      ),
+      CameraUpdate.newLatLngZoom(LatLng(device.lat, device.lng), 14),
     );
   }
 
@@ -81,19 +58,22 @@ class _GoogleMapWithSheetState extends State<GoogleMapBody> {
         children: [
           //---------- Google Map ----------//
           GoogleMap(
+            zoomControlsEnabled: false,
             initialCameraPosition: const CameraPosition(
-              target: LatLng(30.0444, 31.2357),  // cairo
+              target: LatLng(30.0444, 31.2357), // cairo
               zoom: 14,
             ),
             markers: markers,
             onMapCreated: (controller) => mapController = controller,
           ),
+
           //------------ Button Sheet --------------//
-          CustomButtonSheet(
-            devices: devices,
-            onSelectDevice: zoomToDevice,
-            sheetController: sheetController,
-          ),
+          Positioned(bottom: 25, right: 10, child: CustomButtonSheet()),
+          // CustomButtonSheet(
+          //   devices: devices,
+          //   onSelectDevice: zoomToDevice,
+          //   sheetController: sheetController,
+          // ),
         ],
       ),
     );

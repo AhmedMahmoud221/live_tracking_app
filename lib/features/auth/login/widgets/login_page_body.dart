@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/core/utils/assets.dart';
 import 'package:live_tracking/core/utils/storage_helper.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
@@ -23,11 +21,11 @@ String? email, password;
 
 class _LoginPageBodyState extends State<LoginPageBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
-  
+
   final TextEditingController _emailCtrl = TextEditingController();
   final TextEditingController _passwordCtrl = TextEditingController();
   bool isLoading = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +49,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           SizedBox(height: 20),
                           // live tracking text
                           SizedBox(child: LiveTrackingText()),
-                                  
+
                           // image
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
@@ -61,15 +59,13 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                                  
+
                           const SizedBox(height: 10),
 
-                          CustomTextFeildHead(title: 
-                            'Email',
-                          ),
-                                  
+                          CustomTextFeildHead(title: 'Email'),
+
                           const SizedBox(height: 6),
-                                  
+
                           // custom text fields
                           SizedBox(
                             child: CustomTextField(
@@ -80,24 +76,22 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                           ),
 
                           const SizedBox(height: 6),
-                                  
-                          CustomTextFeildHead(title: 
-                            'Password',
-                          ),
-                                  
+
+                          CustomTextFeildHead(title: 'Password'),
+
                           // custom text fields
                           SizedBox(
                             child: CustomTextField(
-                               hint: 'Enter your password',
-                                controller: _passwordCtrl,
-                                isPassword: true,
+                              hint: 'Enter your password',
+                              controller: _passwordCtrl,
+                              isPassword: true,
                             ),
                           ),
-                                  
+
                           // account option
                           CustomAccountOption(
                             onPressed: () {
-                              GoRouter.of(context).go(AppRouter.kSignupPageView);
+                              //                              GoRouter.of(context).go(AppRouter.kSignupPageView);
                             },
                             text1: 'You don\'t have an account ?',
                             text2: 'Sign Up',
@@ -107,9 +101,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     ),
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // custom button
                 SizedBox(
                   child: CustomButton(
@@ -117,7 +111,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     onTap: _onLoginPressed,
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
               ],
             ),
@@ -127,31 +121,31 @@ class _LoginPageBodyState extends State<LoginPageBody> {
     );
   }
 
-  // login mithod 
+  // login mithod
   void _onLoginPressed() async {
-  if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Please fill all fields')),
-    );
-    return;
-  }
+    if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
+      return;
+    }
 
-  setState(() => isLoading = true);
+    setState(() => isLoading = true);
 
-  try {
-    final result = await AuthService().login(
-      email: _emailCtrl.text.trim(),
-      password: _passwordCtrl.text.trim(),
-    );
-
-     // save token
-    await SecureStorage.saveToken(result.token);
-
-      GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: ${e.toString()}')),
+    try {
+      final result = await AuthService().login(
+        email: _emailCtrl.text.trim(),
+        password: _passwordCtrl.text.trim(),
       );
+
+      // save token
+      await SecureStorage.saveToken(result.token);
+
+      //  GoRouter.of(context).go(AppRouter.kGoogleMapHomePage);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Login failed: ${e.toString()}')));
     } finally {
       setState(() => isLoading = false);
     }

@@ -19,34 +19,34 @@
 //       backgroundColor: Colors.white,
 
 //       // ===== AppBar =====
-//       appBar: AppBar(
-//         backgroundColor: const Color.fromARGB(179, 214, 246, 255),
-//         title: Center(
-//           child: RichText(
-//             text: TextSpan(
-//               children: [
-//                 const TextSpan(
-//                   text: 'Live ',
-//                   style: TextStyle(
-//                     color: Colors.blue,
-//                     fontSize: 22,
-//                     fontWeight: FontWeight.w600,
-//                   ),
-//                 ),
-//                 TextSpan(
-//                   text: 'Tracking',
-//                   style: TextStyle(
-//                     color: Colors.black,
-//                     fontSize: 22,
-//                     fontWeight: FontWeight.w600,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//         centerTitle: true,
-//       ),
+//       // appBar: AppBar(
+//       //   backgroundColor: const Color.fromARGB(179, 214, 246, 255),
+//       //   title: Center(
+//       //     child: RichText(
+//       //       text: TextSpan(
+//       //         children: [
+//       //           const TextSpan(
+//       //             text: 'Live ',
+//       //             style: TextStyle(
+//       //               color: Colors.blue,
+//       //               fontSize: 22,
+//       //               fontWeight: FontWeight.w600,
+//       //             ),
+//       //           ),
+//       //           TextSpan(
+//       //             text: 'Tracking',
+//       //             style: TextStyle(
+//       //               color: Colors.black,
+//       //               fontSize: 22,
+//       //               fontWeight: FontWeight.w600,
+//       //             ),
+//       //           ),
+//       //         ],
+//       //       ),
+//       //     ),
+//       //   ),
+//       //   centerTitle: true,
+//       // ),
 
 //       // ===== Body ===== //
 //       body: Padding(
@@ -107,62 +107,62 @@
 //             ),
 //           ],
 //         ),
-//       ),
+//       )
 
 //       // ===== Bottom Navigation Bar =====
-//       bottomNavigationBar: CustomBottomBar(
-//         selectedIndex: selectedIndex,
-//         onItemTapped: (index) {
-//           setState(() {
-//             selectedIndex = index;
-//           });
+//       // bottomNavigationBar: CustomBottomBar(
+//       //   selectedIndex: selectedIndex,
+//       //   onItemTapped: (index) {
+//       //     setState(() {
+//       //       selectedIndex = index;
+//       //     });
 
 //           // ===== Navigation Logic =====
-//           switch (index) {
-//             case 0:
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (_) => const GoogleMapHomePage()),
-//               );
-//               break;
+// //           switch (index) {
+// //             case 0:
+// //               Navigator.push(
+// //                 context,
+// //                 MaterialPageRoute(builder: (_) => const GoogleMapHomePage()),
+// //               );
+// //               break;
 
-//             case 1:
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (_) => const GoogleMapBody()),
-//               );
-//               break;
+// //             case 1:
+// //               Navigator.push(
+// //                 context,
+// //                 MaterialPageRoute(builder: (_) => const GoogleMapBody()),
+// //               );
+// //               break;
 
-//             case 2:
-//               ScaffoldMessenger.of(context).showSnackBar(
-//                 const SnackBar(content: Text("Notifications Page")),
-//               );
-//               break;
+// //             case 2:
+// //               ScaffoldMessenger.of(context).showSnackBar(
+// //                 const SnackBar(content: Text("Notifications Page")),
+// //               );
+// //               break;
 
-//             case 3:
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (_) => const CustomDrawer()),
-//               );
-//               break;
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
+// //             case 3:
+// //               Navigator.push(
+// //                 context,
+// //                 MaterialPageRoute(builder: (_) => const CustomDrawer()),
+// //               );
+// //               break;
+// //           }
+// //         },
+// //       ),
+// //     );
+// //   }
+// // }
 
-// Widget buildCarItem(IconData icon, String title, String subtitle, Color coloring) {
-//   return Column(
-//     mainAxisSize: MainAxisSize.min,
-//     children: [
-//       Icon(icon, size: 30, color: coloring),
-//       const SizedBox(height: 6),
-//       Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-//       Text(
-//         subtitle,
-//         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-//       ),
-//     ],
-//   );
-// }
+// // Widget buildCarItem(IconData icon, String title, String subtitle, Color coloring) {
+// //   return Column(
+// //     mainAxisSize: MainAxisSize.min,
+// //     children: [
+// //       Icon(icon, size: 30, color: coloring),
+// //       const SizedBox(height: 6),
+// //       Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+// //       Text(
+// //         subtitle,
+// //         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+// //       ),
+// //     ],
+// //   );
+// // }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:live_tracking/core/utils/app_router.dart';
 import 'package:live_tracking/core/utils/assets.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_account_option.dart';
 import 'package:live_tracking/features/auth/login/widgets/custom_button.dart';
@@ -97,7 +95,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                         // Account option
                         CustomAccountOption(
                           onPressed: () {
-                            GoRouter.of(context).go(AppRouter.kLoginPageView);
+                            //  GoRouter.of(context).go(AppRouter.kLoginPageView);
                           },
                           text1: 'Already have an account ?',
                           text2: 'Sign In',
@@ -110,10 +108,7 @@ class _SignupPageBodyState extends State<SignupPageBody> {
                 const SizedBox(height: 20),
 
                 // Sign Up button
-                CustomButton(
-                  buttonText: 'Sign Up',
-                  onTap: _onSignupPressed,
-                ),
+                CustomButton(buttonText: 'Sign Up', onTap: _onSignupPressed),
 
                 const SizedBox(height: 20),
               ],
@@ -129,16 +124,16 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         _emailCtrl.text.isEmpty ||
         _passwordCtrl.text.isEmpty ||
         _confirmCtrl.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
       return false;
     }
 
     if (_passwordCtrl.text != _confirmCtrl.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Passwords do not match')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
       return false;
     }
 
@@ -164,18 +159,18 @@ class _SignupPageBodyState extends State<SignupPageBody> {
         isLoading = false;
       });
 
-       // after success login print token or saved
+      // after success login print token or saved
       print('Token: ${result.token}');
 
       // Navigate to home page
-      GoRouter.of(context).go(AppRouter.kLoginPageView);
+      //  GoRouter.of(context).go(AppRouter.kLoginPageView);
     } catch (e) {
       setState(() {
         isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 }

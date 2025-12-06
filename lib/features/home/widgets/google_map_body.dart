@@ -1,53 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:live_tracking/features/auth/models/device_model.dart';
 import 'package:live_tracking/features/home/widgets/custom_button_sheet.dart';
 
 class GoogleMapBody extends StatefulWidget {
   const GoogleMapBody({super.key});
 
   @override
-  State<GoogleMapBody> createState() => _GoogleMapWithSheetState();
+  State<GoogleMapBody> createState() => _GoogleMapBodyState();
 }
 
-class _GoogleMapWithSheetState extends State<GoogleMapBody> {
-  GoogleMapController? mapController;
-
-  final DraggableScrollableController sheetController =
-      DraggableScrollableController();
-
-  List<DeviceModel> devices = [
-    DeviceModel(name: "Device 1", status: "online", lat: 30.0444, lng: 31.2357),
-    DeviceModel(name: "Device 2", status: "offline", lat: 29.956, lng: 30.912),
-    DeviceModel(name: "Device 3", status: "offline", lat: 29.956, lng: 30.912),
-    DeviceModel(name: "Device 4", status: "offline", lat: 29.956, lng: 30.912),
-  ];
+class _GoogleMapBodyState extends State<GoogleMapBody> {
+  late GoogleMapController mapController;
 
   Set<Marker> markers = {};
+  List<Map<String, dynamic>> devices = [];
 
   @override
   void initState() {
     super.initState();
-    addMarkers();
+    generateFakeDevices();
+    generateMarkers();
   }
 
-  void addMarkers() {
-    markers.clear();
-    for (var d in devices) {
+  void generateFakeDevices() {
+    devices = List.generate(20, (index) {
+      return {
+        "id": index,
+        "name": "Device ${index + 1}",
+        "status": index % 2 == 0 ? "online" : "offline",
+        "lat": 30.0 + index * 0.002,
+        "lng": 31.0 + index * 0.002,
+      };
+    });
+  }
+
+  void generateMarkers() {
+    for (var device in devices) {
       markers.add(
         Marker(
-          markerId: MarkerId(d.name),
-          position: LatLng(d.lat, d.lng),
-          infoWindow: InfoWindow(title: d.name),
+          markerId: MarkerId(device["id"].toString()),
+          position: LatLng(device["lat"], device["lng"]),
+          infoWindow: InfoWindow(title: device["name"]),
         ),
       );
     }
-    setState(() {});
   }
 
-  void zoomToDevice(DeviceModel device) {
-    mapController?.animateCamera(
-      CameraUpdate.newLatLngZoom(LatLng(device.lat, device.lng), 14),
+  void moveToDevice(Map<String, dynamic> device) {
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(device["lat"], device["lng"]), zoom: 17),
+      ),
     );
   }
 
@@ -56,24 +59,26 @@ class _GoogleMapWithSheetState extends State<GoogleMapBody> {
     return Scaffold(
       body: Stack(
         children: [
-          //---------- Google Map ----------//
           GoogleMap(
-            zoomControlsEnabled: false,
             initialCameraPosition: const CameraPosition(
-              target: LatLng(30.0444, 31.2357), // cairo
-              zoom: 14,
+              target: LatLng(30.0, 31.0),
+              zoom: 12,
             ),
             markers: markers,
-            onMapCreated: (controller) => mapController = controller,
+            onMapCreated: (controller) {
+              mapController = controller;
+            },
           ),
 
-          //------------ Button Sheet --------------//
-          Positioned(bottom: 25, right: 10, child: CustomButtonSheet()),
-          // CustomButtonSheet(
-          //   devices: devices,
-          //   onSelectDevice: zoomToDevice,
-          //   sheetController: sheetController,
-          // ),
+          // زرار الشيت
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: CustomButtonSheet(
+              devices: devices,
+              onSelectDevice: moveToDevice,
+            ),
+          ),
         ],
       ),
     );

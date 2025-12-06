@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:live_tracking/custom_bottom_bar.dart';
+import 'package:live_tracking/devices_page.dart';
+import 'package:live_tracking/features/devices/presentation/views/devices_page.dart';
+import 'package:live_tracking/features/home/widgets/google_map_body.dart';
 import 'package:live_tracking/profile_page.dart';
-import 'google_map_home_page.dart';
-import 'devices_page.dart';
-import 'notification_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,9 +16,9 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
 
   final List<Widget> pages = [
-    GoogleMapHomePage2(),
+    AddVehiclePage(),
     DevicesPage(),
-    LiveTrackingPage(),
+    GoogleMapBody(),
     ProfilePage(),
   ];
 
